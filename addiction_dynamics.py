@@ -54,7 +54,7 @@ def max(a, b):
 
 # A(t) = q * V  + f(R(lambda(t));q)
 def A(t):
-    return q * min(1, max(0, (C(t) - S(t) - E(t)))) + q
+    return q * min(1, max(0, (C(t) - S(t) - E(t))))
 
 # C(t) = C(t-1) + b*min(1, 1 - C(t-1))*A(t - 1) - d * C(t-1), C(0)
 listC = [0]
