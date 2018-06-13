@@ -72,7 +72,7 @@ def S(t):
         return listS[t]
     else:
         listS.append(S(t-1) + p * max(0, maxCapS - S(t-1)) - h * C(t-1) - k * A(t-1))
-        return listS[t]
+    return listS[t]
 
 #for lambda and E, let's just use equation (6) and assume lambda = 0.5 and E = 0 
 def _lambda(t):
