@@ -5,7 +5,8 @@ C = state variable (undermines S); craving
 E = societal measures (random Possion distribution)
 A = addiction (frequency of addictive action), A = q*V
 V = addiction vulnerability (V = 0 if C - S - E < 0 || V = 1 if C - S - E > 0), V = min(1, max(0, C - S - E))
-lambda = impact of A on C
+lambda = impact of A on C; lambda(t) represents frequency of event in given time. Poisson distribution represents the probability of it happening in a given time. 
+independent occuring at a known frequency. 
 
 t = time, unit is week
 
@@ -52,9 +53,9 @@ def max(a, b):
         return a 
     return b 
 
-# A(t) = q * V  + f(R(lambda(t));q)
+# A(t) = q * V  + f(R(lambda(t));q)    //// poissoin is [0,3] with the poisson distribution
 def A(t):
-    return q * min(1, max(0, (C(t) - S(t) - E(t))))
+    return q * min(1, max(0, (C(t) - S(t) - E(t)))) + 1
 
 # C(t) = C(t-1) + b*min(1, 1 - C(t-1))*A(t - 1) - d * C(t-1), C(0)
 listC = [0]
@@ -72,11 +73,11 @@ def S(t):
         return listS[t]
     else:
         listS.append(S(t-1) + p * max(0, maxCapS - S(t-1)) - h * C(t-1) - k * A(t-1))
-    return listS[t]
+        return listS[t]
 
 #for lambda and E, let's just use equation (6) and assume lambda = 0.5 and E = 0 
 def _lambda(t):
-    return 0.5
+    return 0.25
 
 def E(t):
     return 0
